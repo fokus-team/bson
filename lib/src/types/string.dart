@@ -51,4 +51,11 @@ class BsonCString extends BsonString{
      buffer.offset += utfData.length;
      buffer.writeByte(0);
   }
+  unpackValue(BsonBinary buffer){
+    int size = 0;
+    while (buffer.byteList[buffer.offset + size] != 0)
+      size++;
+    data = utf8.decode(buffer.byteList.getRange(buffer.offset, buffer.offset+size).toList());
+    buffer.offset += size+1;
+  }
 }
