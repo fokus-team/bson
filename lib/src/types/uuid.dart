@@ -23,7 +23,7 @@ class BsonUuid extends BsonBinary {
   }
 
   static Uint8List uuidToByteList(Uuid? uuid) =>
-      (uuid ??= RandomBasedUuidGenerator().generate()).bytes;
+      (uuid ??= RandomUuidGenerator().generate()).toBytes();
 
   @override
   String toString() => 'UUID("${value.toString()}")';
