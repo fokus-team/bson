@@ -133,6 +133,8 @@ abstract class BsonObject {
       return BsonBoolean(value);
     } else if (value is Rational) {
       return BsonDecimal128(value);
+    } else if (value is UuidValue) {
+      return BsonUuid(value);
     }
     throw Exception('Not implemented for $value');
   }
@@ -178,7 +180,7 @@ abstract class BsonObject {
     }
   }
 
-  static int elementSize(String? name, Object value) {
+  static int elementSize(String? name, Object? value) {
     var size = 1;
     if (name != null) {
       size += Statics.getKeyUtf8(name).length + 1;
